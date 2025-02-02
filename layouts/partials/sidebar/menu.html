@@ -1,0 +1,33 @@
+<div class="sidebar-menu flex-fill">
+    <div class="sidebar-scroll">
+        <div class="sidebar-menu-inner">
+            {{ with $.Site.Data.webstack }}
+            <ul>
+                {{ range . }}
+                {{ if .list }}
+                <li class="sidebar-item">
+                    <a href="#category-{{ .taxonomy | md5 }}" class="smooth">
+                        <i class="{{ .icon }} icon-fw icon-lg mr-2"></i>
+                        <span>{{ .taxonomy }}</span>
+                        <i class="iconfont icon-arrow-r-m sidebar-more text-sm"></i>
+                    </a>
+                    {{ with .list }}
+                    <ul>
+                        {{ range . }}
+                        <li>
+                            <a href="#category-{{ .term | md5 }}" class="smooth">
+                                <i class="{{ .icon }} icon-fw icon-lg mr-2"></i>
+                                <span>{{ .term }}</span>
+                            </a>
+                        </li>
+                        {{ end }}
+                    </ul>
+                    {{ end }}
+                </li>
+                {{ end }}
+                {{ end }}
+            </ul>
+            {{ end }}
+        </div>
+    </div>
+</div>

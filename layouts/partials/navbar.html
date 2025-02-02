@@ -1,0 +1,24 @@
+<div class="big-header-banner">
+    <div id="header" class="page-header sticky">
+        <div class="navbar navbar-expand-md">
+            <div class="container-fluid p-0">
+                <!--手机端顶部图标-->
+                {{ partialCached "navbar/mobile-logo.html" . }}
+
+                <div class="collapse navbar-collapse order-2 order-md-1">
+                    <!-- PC 分类收缩图标-->
+                    {{ partialCached "navbar/collapse.html" . }}
+
+                    <!--顶部链接-->
+                    {{ partialCached "navbar/links.html" . }}
+                </div>
+                <!--left end-->
+                
+                <!--right-->
+                {{ partialCached "navbar/mobile-right.html" . }}
+                <!--right end-->
+            </div>
+        </div>
+    </div>
+    <div class="placeholder placeholder-header"></div>
+</div>

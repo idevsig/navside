@@ -1,0 +1,10 @@
+<div id="sidebar" class="sticky sidebar-nav fade" data="1">
+    <div class="modal-dialog h-100 sidebar-nav-inner">
+        <!--头部Logo-->
+        {{ partialCached "sidebar/logo.html" . }}
+        <!--中部分类-->
+        {{ partialCached "sidebar/menu.html" . }}
+        <!--信息-->
+        {{ partialCached "sidebar/info.html" . }}
+    </div>
+</div>

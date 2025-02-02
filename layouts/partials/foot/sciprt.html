@@ -1,0 +1,12 @@
+<script>
+    var config = {"bg_img":"","bg_img_night":"","tooltip":true,"zhida":false,"hide_description":false,"load_sort":false,"admin":false,"search_bookmark":1}
+</script>
+
+{{ with $.Site.Params.Analytics }}
+<!-- 51.LA 网站统计 -->
+{{ if and .A51laid .A51lack }}
+<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+<script>LA.init({ id: "{{ .A51laid }}", ck: "{{ .A51lack }}" })</script>
+{{ end }}
+<!-- end 51.LA 网站统计 -->
+{{ end }}

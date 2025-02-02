@@ -1,0 +1,46 @@
+<!-- CSS 单文件，不需要 integrity -->
+{{- $files := slice "favicon.ico" "manifest.json" }}
+
+{{- range $files }}
+  <link rel="stylesheet" href="{{ . | relURL }}">
+{{- end }}
+
+<!-- CSS 全量文件，需要 integrity，保存到 static/ -->
+{{- $cssFiles := slice 
+  "libs/bootstrap-icons/font/bootstrap-icons.min.css"
+  "libs/fontawesome/css/all.min.css"
+}}
+
+{{- range $cssFiles }}
+  {{- $cssPath := . }}
+  {{- if eq hugo.Environment "development" }}
+    <link rel="stylesheet" href="{{ $cssPath | relURL }}">
+  {{- else }}
+    {{- $css := resources.Match $cssPath }}
+    {{- if $css }}
+      {{- $fingerprint := index $css 0 | fingerprint }}
+      <link rel="stylesheet" href="{{ $fingerprint.RelPermalink }}" integrity="{{ $fingerprint.Data.Integrity }}" crossorigin="anonymous">
+    {{- else }}
+      <link rel="stylesheet" href="{{ $cssPath | relURL }}">
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+<!-- CSS 指定文件，需要 integrity，保存到 assets/ -->
+{{- $cssFiles := slice 
+  "libs/bootstrap-4.6.2/css/bootstrap.min.css"
+  "css/style-3.03029.1.css" 
+  "css/main.css" 
+}}
+
+{{- range $cssFiles }}
+  {{- with resources.Get . }}
+    {{- if eq hugo.Environment "development" }}
+      <link rel="stylesheet" href="{{ .RelPermalink }}">
+    {{- else }}
+      {{- with . | minify | fingerprint }}
+        <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}

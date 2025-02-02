@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+
+<body >
+  <!-- 加载页 -->
+  {{ partial "loading.html" . }}
+
+  <div class="page-container">
+  <!-- 侧边栏 -->
+  {{ partial "sidebar.html" . }}
+
+    <div class="main-content flex-fill not">
+    {{ partial "navbar.html" . }}
+    {{ block "main" . }}{{ end }}
+    </div>
+
+  </div>
+
+  <!-- 页脚 -->
+  {{ partial "footer.html" . }}
+  <!-- 底部 -->
+  {{ partial "foot.html" . }}
+</body>
+</html>

@@ -1,0 +1,12 @@
+<div class="sidebar-logo border-bottom border-color">
+    <div class="logo overflow-hidden">
+        <a href="/" class="logo-expanded">
+            <img src="{{ $.Site.Params.images.logoExpandLight | relURL }}" title="{{ site.Title }}" height="40" class="logo-light">
+            <img src="{{ $.Site.Params.images.logoExpandDark | relURL }}" title="{{ site.Title }}" height="40" class="logo-dark d-none">
+        </a>
+        <a href="/" class="logo-collapsed">
+            <img src="{{ $.Site.Params.images.logoCollapseLight | relURL }}" title="{{ site.Title }}" height="40" class="logo-light">
+            <img src="{{ $.Site.Params.images.logoCollapseDark | relURL }}" title="{{ site.Title }}" height="40" class="logo-dark d-none">
+        </a>
+    </div>
+</div>

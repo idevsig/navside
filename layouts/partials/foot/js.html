@@ -1,0 +1,56 @@
+{{/*  {{- with resources.Get "libs/jquery/jquery.js" }}
+  {{- if eq hugo.Environment "development" }}
+    {{- with . | js.Build }}
+      <script src="{{ .RelPermalink }}"></script>
+    {{- end }}
+  {{- else }}
+    {{- $opts := dict "minify" true }}
+    {{- with . | js.Build $opts | fingerprint }}
+      <script src="{{ .RelPermalink }}" integrity="{{- .Data.Integrity }}" crossorigin="anonymous"></script>
+    {{- end }}
+  {{- end }}
+{{- end }}  */}}
+
+<!-- CSS 指定文件，不压缩，需要 integrity，保存到 assets/ -->
+{{- $jsFiles := slice 
+  "libs/jquery-3.7.1/jquery.min.js"
+  "libs/popper-1.16.1/umd/popper.min.js"
+  "libs/bootstrap-4.6.2/js/bootstrap.min.js"
+  "libs/lazyload-19.1.3/lazyload.min.js"
+}}
+
+{{- range $jsFiles }}
+  {{- with resources.Get . }}
+    {{- if eq hugo.Environment "development" }}
+      {{- with . }}
+        <script src="{{ .RelPermalink }}"></script>
+      {{- end }}
+    {{- else }}
+      {{- with . | fingerprint }}
+        <script src="{{ .RelPermalink }}" integrity="{{- .Data.Integrity }}" crossorigin="anonymous"></script>
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+<!-- CSS 指定文件，压缩，需要 integrity，保存到 assets/ -->
+{{- $jsFiles := slice 
+  "js/tooltip-extend.js"
+  "js/app-mini.js"
+  "js/main.js"
+}}
+
+{{- range $jsFiles }}
+  {{- with resources.Get . }}
+    {{- if eq hugo.Environment "development" }}
+      {{- with . | js.Build }}
+        <script src="{{ .RelPermalink }}"></script>
+      {{- end }}
+    {{- else }}
+      {{- $opts := dict "minify" true }}
+      {{- with . | js.Build $opts | fingerprint }}
+        <script src="{{ .RelPermalink }}" integrity="{{- .Data.Integrity }}" crossorigin="anonymous"></script>
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end}}

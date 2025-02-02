@@ -1,0 +1,25 @@
+- item: 全量
+  icon: fas fa-chevron-circle-down
+  link: "https://navs.idev.top"
+
+- item: 爱开发
+  icon: fas fa-code
+  link: "https://www.idev.top/"
+
+- item: 社区
+  icon: fas fa-terminal
+  link: "https://forum.idev.top/"
+
+- item: 主页
+  icon: fas fa-blog
+  link: "https://i.jetsung.com"
+
+- item: 源码
+  icon: fab fa-git
+  list:
+    - name: Code
+      url: "https://git.jetsung.com/jetsung"
+    - name: GitHub
+      url: "https://github.com/jetsung"
+    - name: GitCode
+      url: "https://gitcode.com/jetsung"

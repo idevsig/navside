@@ -1,0 +1,24 @@
+{{ with $.Site.Data.headers }}
+<ul class="navbar-nav site-menu nav-top">
+    {{ range .}}
+    <li class="menu-item-has-children">
+        <a href="{{ .link }}" target="_blank" title='{{ .item }}'>
+            <i class="{{ .icon }} icon-fw mr-2"></i>
+            <span>{{ .item }}</span>
+        </a>
+        {{ with .list }}
+        <ul>
+            {{ range .}}
+            <li>
+                <a href="{{ .url }}" target="_blank" title='{{ .name }}'>
+                    <i class="{{ .icon }} icon-fw mr-2"></i>
+                    <span> {{ .name }}</span>
+                </a>
+            </li>
+            {{ end }}
+        </ul>
+        {{ end }}
+    </li>
+    {{ end }}    
+</ul>
+{{ end }}
