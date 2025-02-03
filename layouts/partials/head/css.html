@@ -1,9 +1,5 @@
-<!-- CSS 单文件，不需要 integrity -->
-{{- $files := slice "favicon.ico" "manifest.json" }}
-
-{{- range $files }}
-  <link rel="stylesheet" href="{{ . | relURL }}">
-{{- end }}
+<link rel="shortcut icon" href="{{ `favicon.ico` | relURL }}" type="image/x-icon">
+<link rel="manifest" crossorigin="use-credentials" href="{{ `manifest.json` | relURL }}">
 
 <!-- CSS 全量文件，需要 integrity，保存到 static/ -->
 {{- $cssFiles := slice 

@@ -24,7 +24,7 @@ enableGitInfo         = true
     description   = "爱开发精选导航 - 收录优质开发者工具、技术社区、云服务、AI平台等资源"
 
 [params.images]
-    favicon           = "assets/images/favicon.png"
+    favicon           = "favicon.ico"
     logosPath         = "assets/images/logos"			     # 网站每个导航地址logo存放地址
     defaultLogo       = "assets/images/default.webp"     
     logoExpandLight   = "assets/images/bt8-expand-light.png"
