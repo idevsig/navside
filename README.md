@@ -22,9 +22,9 @@ hugo server --source=exampleSite
 
 ## 安装
 
-安装（或从）此主题
+**安装此主题**
 
-1. 在项目根目录下运行：
+在项目根目录下运行：
 ```sh
 # 添加主题（未添加此主题时）
 git submodule add https://github.com/idevsig/navside.git themes/navside
@@ -32,7 +32,10 @@ git submodule add https://github.com/idevsig/navside.git themes/navside
 # 首次使用（首次从 Git 拉取代码时）
 git submodule update --init --recursive
 
-# 拉取最新主题 （当主题有代码更新时）
+# 拉取当前主题最新代码
+git submodule update --remote themes/navside
+
+# 拉取所有最新主题代码
 git submodule foreach git pull origin main
 ```
 
@@ -111,10 +114,10 @@ mkdir -p static/assets/images/logos
 
 ## 仓库镜像
 
-- https://git.jetsung.com/idev/navsites
-- https://framagit.org/idev/navsites
-- https://gitcode.com/idev/navsites
-- https://github.com/idevsig/navsites
+- https://git.jetsung.com/idev/navside
+- https://framagit.org/idev/navside
+- https://gitcode.com/idev/navside
+- https://github.com/idevsig/navside
 
 ## Author
 
