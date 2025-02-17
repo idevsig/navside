@@ -1,22 +1,24 @@
 <!-- 主体内容 -->
 <div id="content" class="content-site customize-site">
-	{{/*  <div class="row screen" id="screen_result" style="display: none"></div>  */}}
-	<!-- item list -->
-	{{ range $.Site.Data.webstack }}
-	<div class="d-flex flex-fill" id="category-{{ .taxonomy | md5 }}">
+	<!-- 避免 `webstack` 为空时报错 -->
+	{{ with $.Site.Data.webstack }}
+	{{ range . }}
+	<div class="d-flex flex-fill" id="category-{{ md5 .taxonomy }}">
 		<h4 class="text-gray text-lg mb-4">
-			<i class="{{ .icon }} fa-lg icon-fw icon-lg mr-2"></i> {{ .taxonomy }}
+			{{ with .icon }}<i class="{{ . }} fa-lg icon-fw icon-lg mr-2"></i>{{ end }}
+			{{ .taxonomy }}
 		</h4>
 		<div class="flex-fill"></div>
 	</div>
+
 	{{ with .list }}
 	{{ if gt (len .) 1 }}
 	<div class="d-flex flex-fill flex-tab align-items-center">
 		<div class="overflow-x-auto slider_menu mini_tab" slidertab="sliderTab">
 			<ul class="nav nav-pills menu" role="tablist">
 				{{ range $index, $element := . }}
-				<li class="pagenumber nav-item" data-id="{{ .term | md5 }}" more='0'>
-					<a id="category-{{ .term | md5 }}" class="nav-link {{ if eq $index 0 }}active{{ end }}" data-toggle="pill" href="#tab-{{ .term | md5 }}">{{ .term }}</a>
+				<li class="pagenumber nav-item" data-id="{{ md5 .term }}" more='0'>
+					<a id="category-{{ md5 .term }}" class="nav-link {{ if eq $index 0 }}active{{ end }}" data-toggle="pill" href="#tab-{{ md5 .term }}">{{ .term }}</a>
 				</li>
 				{{ end }}
 			</ul>
@@ -24,27 +26,44 @@
 		<div class='flex-fill'></div>
 	</div>
 	{{ end }}
+
 	<div class="tab-content mt-4">
 		{{ range $index, $element := . }}
-		<div id="tab-{{ .term | md5 }}" class="tab-pane {{ if eq $index 0 }}active{{ end }}" load="1">
-			<div class="row sortable row-{{ .term | md5 }}" id="{{ .term | md5 }}">
+		{{ if gt (len .links) 0 }}
+		<div id="tab-{{ md5 .term }}" class="tab-pane {{ if eq $index 0 }}active{{ end }}" load="1">
+			<div class="row sortable row-{{ md5 .term }}" id="{{ md5 .term }}">
 				{{ range $idx, $ele := .links }}
 				<div class="url-card col-6 col-sm-6 col-md-4 col-xl-5a col-xxl-6a" id="index-{{ $index }}-{{ $idx }}">
 					<div class="url-body default">
 						{{ if .qrcode }}
-						<a href="javascript: void(0);" class="card no-c mb-4" alt="{{ .title }}" data-toggle="tooltip" data-placement="bottom" data-html="true" title="<img src='{{ .qrcode }}' width='128'>">
+						<a href="javascript:void(0);" 
+							class="card no-c mb-4" 
+							alt="{{ .title }}" 
+							data-toggle="tooltip" 
+							data-placement="bottom" 
+							data-html="true" 
+							rel="noopener noreferrer"
+							title="<img src='{{ .qrcode }}' width='128'>">
 						{{ else }}	
-						<a href="{{ .url }}" target="_blank" data-url="{{ .url }}" alt="{{ .title }}" class="card no-c mb-4" data-placement="bottom" data-toggle="tooltip" title="{{ .description }}">
+						<a href="{{ .url }}" 
+							target="_blank" 
+							alt="{{ .title }}" 
+							title="{{ .description }}"
+							class="card no-c mb-4" 
+							data-url="{{ .url }}" 
+							data-placement="bottom" 
+							data-toggle="tooltip"
+							rel="noopener noreferrer">
 						{{ end }}
 							<div class="card-body">
 								<div class="url-content d-flex align-items-center">
 									<div class="url-img mr-2 d-flex align-items-center justify-content-center">
 										{{- $defaultLogo := $.Site.Params.Images.defaultLogo -}}
-										{{ if findRE "http.*?(.|\n)*?" .logo }}
+										{{ if hasPrefix .logo "http" }}
 										<img class="lazy" 
 											src="{{ .logo }}" 
 											data-src="{{ .logo }}" 
-											onerror="javascript: this.src='{{ $defaultLogo }}'"
+											onerror="this.src='{{ $defaultLogo }}'"
 											alt="{{ .title }}">
 										{{ else }}
 										{{ if .logo }}
@@ -72,8 +91,10 @@
 			</div>
 		</div> 
 		{{ end }}
+		{{ end }}
 	</div>
 	<br />
+	{{ end }}
 	{{ end }}
 	{{ end }} 
 

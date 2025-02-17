@@ -1,22 +1,29 @@
 {{ with $.Site.Data.headers }}
 <ul class="navbar-nav site-menu nav-top">
-    {{ range .}}
+    {{ range . }}
     <li class="menu-item-has-children">
-        <a href="{{ .link }}" target="_blank" title='{{ .item }}'>
-            <i class="{{ .icon }} icon-fw mr-2"></i>
+        {{ if .link }}
+        <a href="{{ .link }}" target="_blank" rel="noopener noreferrer" title="{{ .item }}">
+        {{ else }}
+        <a href="javascript:void(0);" title="{{ .item }}">
+        {{ end }}
+            {{ with .icon }}<i class="{{ . }} icon-fw mr-2"></i>{{ end }}
             <span>{{ .item }}</span>
         </a>
+
         {{ with .list }}
+        {{ if gt (len .) 0 }}
         <ul>
-            {{ range .}}
+            {{ range . }}
             <li>
-                <a href="{{ .url }}" target="_blank" title='{{ .name }}'>
-                    <i class="{{ .icon }} icon-fw mr-2"></i>
-                    <span> {{ .name }}</span>
+                <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" title="{{ .name }}">
+                    {{ with .icon }}<i class="{{ . }} icon-fw mr-2"></i>{{ end }}
+                    <span>{{ .name }}</span>
                 </a>
             </li>
             {{ end }}
         </ul>
+        {{ end }}
         {{ end }}
     </li>
     {{ end }}    

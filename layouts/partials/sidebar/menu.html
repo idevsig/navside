@@ -4,24 +4,25 @@
             {{ with $.Site.Data.webstack }}
             <ul>
                 {{ range . }}
-                {{ if .list }}
+                {{ if and .list (gt (len .list) 0) }}
                 <li class="sidebar-item">
-                    <a href="#category-{{ .taxonomy | md5 }}" class="smooth">
-                        <i class="{{ .icon }} icon-fw icon-lg mr-2"></i>
+                    <a href="#category-{{ md5 .taxonomy }}" class="smooth">
+                        {{ with .icon }}<i class="{{ . }} icon-fw icon-lg mr-2"></i>{{ end }}
                         <span>{{ .taxonomy }}</span>
-                        <i class="iconfont icon-arrow-r-m sidebar-more text-sm"></i>
                     </a>
                     {{ with .list }}
+                    {{ if gt (len .) 0 }}
                     <ul>
                         {{ range . }}
                         <li>
-                            <a href="#category-{{ .term | md5 }}" class="smooth">
-                                <i class="{{ .icon }} icon-fw icon-lg mr-2"></i>
+                            <a href="#category-{{ md5 .term }}" class="smooth">
+                                {{ with .icon }}<i class="{{ . }} icon-fw icon-lg mr-2"></i>{{ end }}
                                 <span>{{ .term }}</span>
                             </a>
                         </li>
                         {{ end }}
                     </ul>
+                    {{ end }}
                     {{ end }}
                 </li>
                 {{ end }}
