@@ -43,7 +43,7 @@ git submodule foreach git pull origin main
 
 1. 复制 `exampleSite`   
 ```sh
-cp -r themes/navside/exampleSite .
+cp -r themes/navside/exampleSite/* .
 ```
 
 2. 配置 `config.toml`   

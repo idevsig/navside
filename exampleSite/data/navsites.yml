@@ -1,0 +1,200 @@
+---
+- taxonomy: 杰森
+  icon: bi bi-star-fill
+  list:
+    - term: 社交
+      links:
+        - title: 爱开发
+          logo: idev.png
+          favicon:
+          url: https://www.idev.top/
+          description: 开发者技术资讯网站
+          qrcode:
+        - title: 爱开发社区
+          logo: idev.png
+          favicon:
+          url: https://forum.idev.top/
+          description: 开发者技术交流社区
+          qrcode:
+        - title: Code
+          logo: gitlab.png
+          favicon:
+          url: "https://git.jetsung.com/jetsung"
+          description: 项目源码托管平台
+        - title: GitCode
+          logo: gitcode.png
+          favicon:
+          url: "https://gitcode.com/jetsung"
+          description: （国内）作品项目代码开源          
+        - title: GitHub
+          logo: github.png
+          favicon:
+          url: "https://github.com/jetsung"
+          description: （国外）作品项目代码开源
+        - title: 微信公众号
+          logo: weixin.png
+          favicon: https://open.weixin.qq.com/zh_CN/htmledition/res/assets/res-design-download/icon64_appwx_logo.png
+          description: 爱开发微信公众号
+          qrcode: assets/images/weixin.png
+        - title: 头条号
+          logo: toutiao.png
+          favicon: 
+          url: https://www.toutiao.com/c/user/token/MS4wLjABAAAATopQ1LkY3v_vbmTLcW504_Asubeqs24gH-IFJp66CDLoFB2ATjEwBZJhdIsgKEPZ/?
+          description: 平平无奇程序员（头条号）
+          qrcode: assets/images/toutiao.png
+
+- taxonomy: 开发服务
+  icon: bi bi-code-square
+  list:
+    - term: 代码托管
+      links:
+        - title: ◈GitHub
+          logo: github.png
+          favicon:
+          url: https://github.com
+          description: 全球最大的代码托管平台
+        - title: ◈GitCode
+          logo: gitcode.png
+          favicon:
+          url: https://gitcode.com
+          description: （国内）代码托管平台
+        - title: ◈Framagit
+          logo: framagit.svg
+          favicon: https://framagit.org/uploads/-/system/appearance/header_logo/1/logo.svg
+          url: https://framagit.org
+          description: 基于 GitLab，代码托管平台，支持 Pages。
+        - title: ◈Codeberg
+          logo: codeberg.png
+          favicon:
+          url: https://codeberg.org
+          description: 基于 Gitea，代码托管平台，支持 Pages。
+        - title: 阿里云效 Codeup
+          logo: codeup.svg
+          favicon:
+          url: https://codeup.aliyun.com
+          description: （国内）阿里云效代码托管平台，支持 DevOPS。
+        - title: Gitee
+          logo: gitee.png
+          favicon:
+          url: https://gitee.com
+          description: （国内）代码托管平台
+        - title: GitLab
+          logo: gitlab.png
+          favicon:
+          url: https://gitlab.com
+          description: （可自建）代码托管平台
+        - title: Coding
+          logo: coding.png
+          favicon:
+          url: https://coding.net
+          description: （国内）代码托管平台
+        - title: AtomGit
+          logo: atomgit.png
+          favicon:
+          url: https://atomgit.com
+          description: （国内）开放原子开源基金会提供的代码托管平台
+        - title: 
+          logo:
+          favicon:
+          url: https://forum.idev.top/d/208
+          description: ⇒更多代码托管服务平台
+    - term: 网站部署      
+      links:
+        - title: Vercel
+          logo: vercel.png
+          favicon:
+          url: https://vercel.com/
+          description: 静态网站托管服务平台
+        - title: Netlify
+          logo: netlify.png
+          favicon:
+          url: https://www.netlify.com/
+          description: 静态网站托管服务平台
+        - title: Fleek
+          logo: fleek.png    
+          favicon:
+          url: https://fleek.xyz/
+          description: 静态网站托管服务平台  
+        - title: Surge
+          logo: surge.svg
+          favicon: https://surge.sh/images/logos/svg/surge-logo.svg
+          url: https://surge.sh/
+          description: 静态网站托管服务平台
+        - title: Fermyon
+          logo: fermyon.png
+          favicon:
+          url: https://fermyon.com/
+          description: WebAssembly 服务托管平台
+    - term: IDE与编辑器
+      links:
+        - title: VSCode
+          logo: vscode.png
+          favicon:
+          url: https://code.visualstudio.com/
+          description: 微软开发的免费、开源的代码编辑器
+        - title: JetBrains iDEA
+          logo: idea.png
+          favicon:
+          url: https://www.jetbrains.com/idea/
+          description: JetBrains 开发的免费、开源的代码编辑器
+        - title: Zed
+          logo: zed.png
+          favicon:
+          url: https://zed.dev/
+          description: 下一代高性能代码编辑器
+        - title: Neovim
+          logo: neovim.png
+          favicon:
+          url: https://neovim.io/
+          description: 一个高速、功能强大的文本编辑器
+        - title: Sublime Text
+          logo: sublimetext.png
+          favicon:
+          url: https://www.sublimetext.com/
+          description: 一个功能强大的代码编辑器
+    - term: 在线开发
+      links:
+        - title: Cloud Shell
+          logo: cloudshell.png
+          favicon: https://www.gstatic.com/cloudssh/images/favicon-192-5bf59255b7c44caaae3120868153fed9.png
+          url: https://shell.cloud.google.com/
+          description: Google Cloud Shell 云端开发环境
+        - title: GitHub Dev
+          logo: github.png
+          favicon:
+          url: https://github.dev/
+          description: GitHub 云端开发者平台
+    - term: 服务部署
+      links:
+        - title: Firebase
+          logo: firebase.png
+          favicon:
+          url: https://firebase.google.com/
+          description: 静态网站托管服务平台
+        - title: ImageKit
+          logo: imagekit.png
+          favicon:
+          url: https://imagekit.io/
+          description: 图片和媒体托管服务平台
+    - term: 在线编辑
+      links:
+        - title: CodeSandBox
+          logo: codesandbox.png
+          favicon:
+          url: https://codesandbox.io/
+          description: 快速Web开发的在线编辑器
+        - title: StackBlitz
+          logo: stackblitz.png
+          favicon:
+          url: https://stackblitz.com/
+          description: Web开发者的在线IDE
+        - title: CodePen
+          logo: codepen.png
+          favicon:
+          url: https://codepen.io/
+          description: 面向前端设计师和开发人员的在线开发环境
+        - title: JSFiddle
+          logo: jsfiddle.png
+          favicon:
+          url: https://jsfiddle.net/
+          description: 前端代码在线编辑器

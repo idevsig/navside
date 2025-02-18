@@ -1,13 +1,23 @@
 {{ with $.Site.Data.headers }}
 <ul class="navbar-nav site-menu nav-top">
+    {{ $targetBlank := slice "new" "blank" "_blank" }} 
     {{ range . }}
-    <li class="menu-item-has-children">
-        {{ if .link }}
-        <a href="{{ .link }}" target="_blank" rel="noopener noreferrer" title="{{ .item }}">
-        {{ else }}
-        <a href="javascript:void(0);" title="{{ .item }}">
+    {{ $target := "_self" }}
+    {{ if .target }}
+        {{ if in $targetBlank .target }}
+            {{ $target = "_blank" }}
         {{ end }}
-            {{ with .icon }}<i class="{{ . }} icon-fw mr-2"></i>{{ end }}
+    {{ end }}    
+    <li class="menu-item-has-children">
+        <a href='{{ default "javascript: void(0);" .link | safeURL }}' 
+        target="{{ $target }}" 
+        rel="noopener noreferrer" 
+        title="{{ .item }}">
+            
+            {{ with .icon }}
+                <i class="{{ . }} icon-fw mr-2"></i>
+            {{ end }}
+
             <span>{{ .item }}</span>
         </a>
 
@@ -15,16 +25,30 @@
         {{ if gt (len .) 0 }}
         <ul>
             {{ range . }}
-            <li>
-                <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" title="{{ .name }}">
-                    {{ with .icon }}<i class="{{ . }} icon-fw mr-2"></i>{{ end }}
-                    <span>{{ .name }}</span>
-                </a>
-            </li>
+                {{ $target_sub := "_self" }}
+                {{ if .target }}
+                    {{ if in $targetBlank .target }}
+                        {{ $target_sub = "_blank" }}
+                    {{ end }}
+                {{ end }}            
+                <li>
+                    <a href="{{ .url | safeURL }}" 
+                        target="{{ $target_sub }}" 
+                        rel="noopener noreferrer" 
+                        title="{{ .name }}">
+
+                        {{ with .icon }}
+                            <i class="{{ . }} icon-fw mr-2"></i>
+                        {{ end }}
+                        
+                        <span>{{ .name }}</span>
+                    </a>
+                </li>
             {{ end }}
         </ul>
         {{ end }}
         {{ end }}
+        
     </li>
     {{ end }}    
 </ul>

@@ -1,10 +1,11 @@
 <!-- 主体内容 -->
 <div id="content" class="content-site customize-site">
 	<!-- 避免 `webstack` 为空时报错 -->
-	{{ with $.Site.Data.webstack }}
-	{{ range . }}
-	<div class="d-flex flex-fill" id="category-{{ md5 .taxonomy }}">
-		<h4 class="text-gray text-lg mb-4">
+	{{ with $.Site.Data.navsites }}
+	{{ range $index, $_ := . }}
+	{{ $hash_str := printf "%v-main-%v" $index .taxonomy | md5 }}
+	<div class="d-flex flex-fill" id="category-{{ $hash_str }}">
+		<h4 class="text-gray text-lg mb-2">
 			{{ with .icon }}<i class="{{ . }} fa-lg icon-fw icon-lg mr-2"></i>{{ end }}
 			{{ .taxonomy }}
 		</h4>
@@ -12,13 +13,14 @@
 	</div>
 
 	{{ with .list }}
-	{{ if gt (len .) 1 }}
+	{{ if gt (len .) 0 }}
 	<div class="d-flex flex-fill flex-tab align-items-center">
 		<div class="overflow-x-auto slider_menu mini_tab" slidertab="sliderTab">
 			<ul class="nav nav-pills menu" role="tablist">
-				{{ range $index, $element := . }}
-				<li class="pagenumber nav-item" data-id="{{ md5 .term }}" more='0'>
-					<a id="category-{{ md5 .term }}" class="nav-link {{ if eq $index 0 }}active{{ end }}" data-toggle="pill" href="#tab-{{ md5 .term }}">{{ .term }}</a>
+				{{ range $idx, $_ := . }}
+				{{ $hash_str_sub := printf "%v-%v-child-%v" $index $idx .term | md5 }}
+				<li class="pagenumber nav-item" data-id="{{ $hash_str_sub }}" more='0'>
+					<a id="category-{{ $hash_str_sub }}" class="nav-link {{ if eq $idx 0 }}active{{ end }}" data-toggle="pill" href="#tab-{{ $hash_str_sub }}">{{ .term }}</a>
 				</li>
 				{{ end }}
 			</ul>
@@ -27,13 +29,15 @@
 	</div>
 	{{ end }}
 
-	<div class="tab-content mt-4">
-		{{ range $index, $element := . }}
+	<div class="tab-content mt-2">
+		{{ range $idx, $_ := . }}
+		{{ $hash_str_sub := printf "%v-%v-child-%v" $index $idx .term | md5 }}
 		{{ if gt (len .links) 0 }}
-		<div id="tab-{{ md5 .term }}" class="tab-pane {{ if eq $index 0 }}active{{ end }}" load="1">
-			<div class="row sortable row-{{ md5 .term }}" id="{{ md5 .term }}">
-				{{ range $idx, $ele := .links }}
-				<div class="url-card col-6 col-sm-6 col-md-4 col-xl-5a col-xxl-6a" id="index-{{ $index }}-{{ $idx }}">
+		<div id="tab-{{ $hash_str_sub }}" class="tab-pane {{ if eq $idx 0 }}active{{ end }}" load="1">
+			<div class="row sortable row-{{ $hash_str_sub }}" id="{{ $hash_str_sub }}">
+				{{ range $i, $_ := .links }}
+				{{ $index_id := printf "index-%v-%v-%v" $index $idx $i }}
+				<div class="url-card col-6 col-sm-6 col-md-4 col-xl-5a col-xxl-6a" id="{{ $index_id }}">
 					<div class="url-body default">
 						{{ if .qrcode }}
 						<a href="javascript:void(0);" 
@@ -83,7 +87,6 @@
 							</div>
 						</a>
 						<a href="{{ .url }}" 
-							target="_blank" 
 							class="togo text-center text-muted is-views" 
 							data-id="689" 
 							data-toggle="tooltip" 
@@ -100,7 +103,6 @@
 		{{ end }}
 		{{ end }}
 	</div>
-	<br />
 	{{ end }}
 	{{ end }}
 	{{ end }} 
