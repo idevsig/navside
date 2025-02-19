@@ -17,14 +17,22 @@
   https://nav.idev.top
 - 本地演示   
 ```sh
-hugo server --source=exampleSite
+hugo serve --source=exampleSite
 ```
 
-## 安装
+## 使用教程
 
-**安装此主题**
+1. 创建新项目
+```sh
+mkdir mynav
+cd mynav
+git init
+```
 
-在项目根目录下运行：
+2. 安装此主题
+
+> 在项目根目录下运行：
+
 ```sh
 # 添加主题（未添加此主题时）
 git submodule add https://github.com/idevsig/navside.git themes/navside
@@ -39,25 +47,17 @@ git submodule update --remote themes/navside
 git submodule foreach git pull origin main
 ```
 
-## 使用
-
-1. 复制 `exampleSite`   
+3. 复制 `exampleSite`   
 ```sh
 cp -r themes/navside/exampleSite/* .
 ```
 
-2. 配置 `config.toml`   
-删除 `themesDir` 此行
+4. 设置数据
 ```sh
-sed -i '/themesDir/d' config.toml
-```
-
-3. 设置数据
-```sh
-data
+content
 ├── friendlinks.yml # 友情链接（左下）
 ├── headers.yml     # 顶部导航（顶部）
-└── webstack.yml    # 网址列表 （中间）
+└── navsites.yml    # 网址列表 （中间）
 ```
 
 - `friendlinks.yml` 格式：
@@ -72,15 +72,17 @@ data
 - item: 主页
   icon: fas fa-blog
   link: "https://i.jetsung.com"
+  target: _blank 
 
 - item: 源码
   icon: fab fa-git
   list:
     - name: Code
       url: "https://git.jetsung.com/jetsung"
+      target: _blank 
 ```
 
-- `webstack.yml` 格式：
+- `navsites.yml` 格式：
 ```yaml
 - taxonomy: 杰森
   icon: bi bi-star-fill
@@ -107,9 +109,32 @@ data
           qrcode: # 二维码
 ```
 
-4. 图标保存地址（根据 `config.toml` 的 `logosPath` 参数）
+5. *图标保存位置（根据 `config.toml` 的 `logosPath` 参数）
 ```sh
 mkdir -p static/assets/images/logos
+```
+
+> 可自行将网站的图标保存至此处。可参考 [`.deploy.sh`](.deploy.sh)，通过 API 方式获取图标。
+
+2. 配置 `config.toml`   
+删除 `themesDir` 此行
+```sh
+sed -i '/themesDir/d' config.toml
+```
+
+6. 运行本地测试
+```sh
+hugo serve
+```
+
+7. 构建项目
+```sh
+hugo build --minify
+```
+
+8. *复制其它文件
+```sh
+cp themes/navside/{.gitignore,.deploy.sh} . 
 ```
 
 ## 仓库镜像

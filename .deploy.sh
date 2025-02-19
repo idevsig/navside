@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# https://github.com/idevsig/navsites/blob/main/.deploy.sh
+# https://git.jetsung.com/idev/idevnav/blob/main/.deploy.sh
 
 set -euo pipefail
 
@@ -22,9 +22,23 @@ if [ -z "$GIT_BRANCH_NAME" ]; then
   fi
 fi
 
-DEPLOY=""      # 部署
+DEPLOY="" # 部署
 
-readonly DATA_DIR="./data"
+# 判断是 HUGO 还是 ZOLA 项目
+if grep -q publishDir config.toml; then
+  readonly CMD="hugo"
+  readonly DATA_DIR="./data"
+  readonly publishDir="publishDir"
+elif grep -q output_dir config.toml; then
+  readonly CMD="zola"
+  readonly DATA_DIR="./content"
+  readonly publishDir="output_dir"
+  
+else
+  echo -e "\033[31merror: cannot determine command\033[0m"
+  exit 1
+fi
+
 readonly ICON_DIR="static/assets/images/logos"
 readonly NAVSITES_FILE="${DATA_DIR}/navsites.yml"
 readonly SYNC_FILE=".sync.txt"
@@ -93,7 +107,7 @@ EOF
 
 # 获取发布目录
 get_publish_dir() {
-  PUBLISH_DIR="$(grep publishDir config.toml | awk -F '\"' '{print $2}')" # static files
+  PUBLISH_DIR="$(grep $publishDir config.toml | awk -F '\"' '{print $2}')" # static files
 }
 
 # 获取项目名称
@@ -108,13 +122,13 @@ get_project_name() {
 # more 分支处理
 action_for_more_bracnch() {
   # 拉取 main 分支文件
-  git checkout main -- .gitignore .gitlab-ci.yml README.md .deploy.sh config.toml "${DATA_DIR}"/friendlinks.yml "${DATA_DIR}"/headers.yml
+  git checkout main -- .gitignore .gitlab-ci.yml README.md .deploy.sh config.toml "${DATA_DIR}/friendlinks.yml" "${DATA_DIR}/headers.yml"
 
   # update config.toml
   sed -i 's#精选导航#全量导航#g' config.toml
   sed -i 's#nav.idev.top#navs.idev.top#g' config.toml
 
-  # update content/headers.yml
+  # update {data,content}/headers.yml
   sed -i 's#全量#精选#g' "${DATA_DIR}/headers.yml"
   sed -i 's#navs.idev.top#nav.idev.top#g' "${DATA_DIR}/headers.yml"
   sed -i 's#bi-circle-fill#bi-circle-half#g' "${DATA_DIR}/headers.yml"
@@ -430,19 +444,24 @@ main() {
     fi
   fi
 
-  # remove zola old data
   rm -rf "$PUBLISH_DIR"  
 
   echo
-  echo "DEPLOY: $DEPLOY"
-  echo "PUBLISH_DIR: $PUBLISH_DIR"
-  echo "PROJECT_NAME: $PROJECT_NAME"
   echo "COMMIT_MSG: $COMMIT_MSG"
   echo "GIT_BRANCH_NAME: $GIT_BRANCH_NAME"
   echo
+  echo "DEPLOY: $DEPLOY"
+  echo "PROJECT: $CMD"
+  echo "PUBLISH_DIR: $PUBLISH_DIR"
+  echo "PROJECT_NAME: $PROJECT_NAME"
+  echo
 
-  if [ "$(command -v hugo)" ]; then
-    hugo --minify
+  if [ "$(command -v $CMD)" ]; then
+    if [ "$CMD" = "hugo" ]; then
+      hugo build --minify
+    elif [ "$CMD" = "zola" ]; then
+      zola build
+    fi
   fi
 
   if [ ! -d "$PUBLISH_DIR" ]; then
@@ -450,9 +469,9 @@ main() {
       exit 1
   fi    
 
-  # if [ -z "$IN_CHINA" ]; then
-  #   check_in_china
-  # fi
+  if [ -z "$IN_CHINA" ]; then
+    check_in_china
+  fi
 
   if [ -z "${GITLAB_CI:-}" ]; then
     fetch_icons

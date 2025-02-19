@@ -1,6 +1,6 @@
 baseURL               = "https://example.com"
 languageCode          = "zh-CN"
-title                 = "网址导航"
+title                 = "爱开发导航"
 theme                 = "navside"
 themesDir             = "../.."
 publishDir            = "public"
@@ -15,7 +15,7 @@ enableGitInfo         = true
     submit        = ""                                   # 左侧导航栏的"网站提交"
     about         = "https://forum.idev.top/p/about"     # 左侧导航栏的"关于导航"页面(./about)    
     enablePreLoad = true		    		             # 网站完全打开前预加载动画
-    textPreLoad   = "网址导航" 		                # 预加载的动画文字, 只有当enablePreLoad=true时生效    
+    textPreLoad   = "爱开发网址导航" 		                # 预加载的动画文字, 只有当enablePreLoad=true时生效    
     expandSidebar = true                                 # 默认展开左侧边导航栏
     displayMode   = 2                                    # 显示模式，0.日间模式，1.深色(夜间)模式。2.实时模式，３.日间模式，４.夜间模式
 
