@@ -17,6 +17,7 @@ enableGitInfo         = true
     textPreLoad   = "" 		                # 预加载的动画文字, 只有当enablePreLoad=true时生效    
     expandSidebar = true                                 # 默认展开左侧边导航栏
     displayMode   = 2                                    # 显示模式，0.日间模式，1.深色(夜间)模式。2.实时模式，３.日间模式，４.夜间模式
+    cardMode      = true                                 # 卡片模式
 
 [params.seo]
     keywords      = ""

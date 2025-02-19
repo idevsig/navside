@@ -1,0 +1,50 @@
+{{ $defaultLogo := $.Site.Params.Images.defaultLogo }}
+{{ $logosPath := $.Site.Params.Images.logosPath }}
+
+{{ range $index, $element := $.Site.Data.navsites }}
+    {{ $hash_str := printf "%v-main-%v" $index .taxonomy | md5 }}
+    {{/*  一级分类  */}}
+    {{ partial "main/component/top.html" (dict "ctx" $element "hash" $hash_str ) }}
+
+    {{ with .list }}
+        {{ if gt (len .) 0 }}
+        {{/*  二级分类  */}}
+        <div class="d-flex flex-fill flex-tab align-items-center">
+            <div class="overflow-x-auto slider_menu mini_tab" slidertab="sliderTab">
+                <ul class="nav nav-pills menu" role="tablist">
+                    {{ range $idx, $_ := . }}
+                    {{ $hash_str_sub := printf "%v-%v-child-%v" $index $idx .term | md5 }}
+                    <li class="pagenumber nav-item" data-id="{{ $hash_str_sub }}" more='0'>
+                        <a id="category-{{ $hash_str_sub }}" 
+                            class="nav-link {{ if eq $idx 0 }}active{{ end }}" 
+                            data-toggle="pill" 
+                            href="#tab-{{ $hash_str_sub }}">{{ .term }}</a>
+                    </li>
+                    {{ end }}
+                </ul>
+            </div>
+            <div class='flex-fill'></div>
+        </div>
+        {{ end }}
+
+        <div class="tab-content mt-2">
+            {{ range $idx, $_ := . }}
+            {{ $hash_str_sub := printf "%v-%v-child-%v" $index $idx .term | md5 }}
+            {{ if gt (len .links) 0 }}
+            <div id="tab-{{ $hash_str_sub }}" class="tab-pane {{ if eq $idx 0 }}active{{ end }}" load="1">
+                <div class="row sortable row-{{ $hash_str_sub }}" id="{{ $hash_str_sub }}">
+                    {{ range $i, $e := .links }}
+                    {{ $index_id := printf "index-%v-%v-%v" $index $idx $i }}
+                    {{ partial "main/component/grid.html" (dict "ctx" $e "hash" $hash_str_sub 
+                    "index" $index_id 
+                    "defaultLogo" $defaultLogo
+                    "logosPath" $logosPath
+                    ) }}
+                    {{ end }}
+                </div>
+            </div> 
+            {{ end }}
+            {{ end }}
+        </div>
+    {{ end }}
+{{ end }}

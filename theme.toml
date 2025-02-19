@@ -1,6 +1,6 @@
 name = 'NavSide'
 license = 'Apache 2.0'
-licenselink = 'https://github.com/idevsig/navside/LICENSE'
+licenselink = 'https://github.com/idevsig/navside/blob/main/LICENSE'
 description = 'NavSide theme'
 
 # The home page of the theme, where the source can be found
