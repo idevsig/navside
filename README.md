@@ -11,10 +11,16 @@
 - 支持 [**Bootstrap Icons 1.11.3**](https://icons.getbootstrap.com/) 图标
 - 支持 51.LA 网站统计
 
+## 预览图
+
+![NavSide 主题手机版](screenshot-mobile.png)
+
+![NavSide 主题](screenshot.png)
+
 ## 演示
 
 - 演示网站   
-  https://nav.idev.top
+  https://navside.skiy.net
 - 本地演示   
 ```sh
 hugo serve --source=exampleSite

@@ -27,7 +27,7 @@
 
             <div class="tab-content mt-2">
                 <div id="tab-{{ $hash_str_sub }}" class="tab-pane active" load="1">
-                    <div class="row sortable row-{{ $hash_str_sub }}" id="{{ $hash_str_sub }}">
+                    <div id="{{ $hash_str_sub }}" class="row sortable row-{{ $hash_str_sub }}">
                         {{ range $i, $e := .links }}
                         {{ $index_id := printf "index-%v-%v-%v" $index $idx $i }}
                         {{ partial "main/component/grid.html" (dict "ctx" $e "hash" $hash_str_sub 

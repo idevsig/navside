@@ -24,19 +24,23 @@
             <div class="card-body">
                 <div class="url-content d-flex align-items-center">
                     <div class="url-img mr-2 d-flex align-items-center justify-content-center">
-                        {{ if hasPrefix .ctx.logo "http" }}
+                    {{ $logoUrl := .ctx.logo }}
+                    {{ if hasPrefix $logoUrl "http" }}
                         <img class="lazy" 
-                            src="{{ .ctx.logo }}" 
-                            data-src="{{ .ctx.logo }}" 
+                            src="{{ $logoUrl }}" 
+                            data-src="{{ $logoUrl }}" 
                             onerror="this.src='{{ .defaultLogo }}'"
                             alt="{{ .ctx.title }}">
+                    {{ else }}
+                        {{ if $logoUrl }}
+                            <img class="lazy" 
+                                src="{{ .logosPath }}/{{ $logoUrl }}" 
+                                onerror="javascript: this.src='{{ .defaultLogo }}'"
+                                alt="{{ .ctx.title }}">
                         {{ else }}
-                        {{ if .ctx.logo }}
-                        <img class="lazy" src="{{ .logosPath }}/{{ .ctx.logo }}" alt="{{ .ctx.title }}">
-                        {{ else }}
-                        <img class="lazy" src="{{ .defaultLogo }}" alt="{{ .ctx.title }}">
+                            <img class="lazy" src="{{ .defaultLogo }}" alt="{{ .ctx.title }}">
                         {{ end }}
-                        {{ end }}	
+                    {{ end }}	
                     </div>
                     <div class="url-info flex-fill">
                         <div class="text-sm overflowClip_1">
@@ -53,8 +57,6 @@
             data-toggle="tooltip" 
             data-placement="right" 
             title="直达" 
-            rel="nofollow">
-            <i class="far fa-arrow-alt-circle-right"></i>
-        </a>                                
+            rel="nofollow"><i class="far fa-arrow-alt-circle-right"></i></a>                                
     </div>
 </div>
