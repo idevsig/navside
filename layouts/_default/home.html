@@ -1,4 +1,17 @@
-{{ define "main" }}
-    <!-- 内容 -->
-    {{ partial "main.html" . }}
-{{ end }}
+{{- define "main" -}}
+    {{- /* 加载页 */ -}}
+    {{ partial "loading.html" . }}
+
+    <div class="page-container">
+    {{- /* 侧边栏 */ -}}
+    {{ partial "sidebar.html" . }}
+
+        <div class="main-content flex-fill not">
+        {{- /* 导航栏 */ -}}
+        {{ partial "navbar.html" . }}
+        {{- /* 内容 */ -}}
+        {{ partial "main.html" . }}        
+        </div>
+
+    </div>
+{{- end -}}
