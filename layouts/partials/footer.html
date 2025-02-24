@@ -15,7 +15,7 @@
     {{ with $.Site.Params.Footer }}
 	<div class="footer-inner">
 		<div class="footer-text">
-			{{ $copyright := .copyright | default "&copy; {year} Powered by [Hugo](https://gohugo.io/) & [NavSide](https://github.com/idevsig/navside)" }}
+			{{ $copyright := .copyright | default "&copy; {year} Powered by <a rel='noopener' href='https://gohugo.io/' target='_blank'>Hugo</a> & <a rel='noopener' href='https://github.com/idevsig/navside' target='_blank'>NavSide</a>" }}
             {{ replace $copyright "{year}" now.Year | markdownify }}
 		</div>
 	</div>

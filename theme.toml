@@ -7,7 +7,7 @@ description = 'NavSide theme'
 homepage = 'https://github.com/idevsig/navside'
 
 # If you have a running demo of the theme
-demosite = 'https://nav.idev.top'
+demosite = 'https://navside.skiy.net'
 
 # Taxonomy terms
 tags = ['navigation', 'light', 'dark' ]

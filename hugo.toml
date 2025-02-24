@@ -27,10 +27,10 @@ enableGitInfo         = true
     favicon           = "favicon.ico"
     logosPath         = "assets/images/logos"			     # 网站每个导航地址logo存放地址
     defaultLogo       = "assets/images/default.webp"     
-    logoExpandLight   = "assets/images/bt8-expand-light.png"
-    logoExpandDark    = "assets/images/bt8-expand-dark.png"
-    logoCollapseLight = "assets/images/bt.png"
-    logoCollapseDark  = "assets/images/bt.png"    
+    logoExpandLight   = "assets/images/ns-expand-light.png"
+    logoExpandDark    = "assets/images/ns-expand-dark.png"
+    logoCollapseLight = "assets/images/ns.png"
+    logoCollapseDark  = "assets/images/ns.png"    
 
 [params.analytics]
     a51laid = "" # 51.LA 网站统计

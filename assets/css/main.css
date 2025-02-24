@@ -410,3 +410,7 @@ img.icon {
 .placeholder-header {
   height: 74px;
 }
+
+.sidebar-show > a > span {
+	font-weight: bold;
+}

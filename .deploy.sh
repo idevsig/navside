@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-# https://git.jetsung.com/idev/idevnav/blob/main/.deploy.sh
+# origin: https://git.jetsung.com/idev/idevnav/blob/main/.deploy.sh
+# lastmod: 2025-02-24
 
 set -euo pipefail
 
@@ -258,7 +259,7 @@ download_icon() {
 
     printf "Saving %s: \n  %-40s" "$cleaned_name" "$download_url"
     if ! curl --connect-timeout 30 -fsL -o "$filepath" "$download_url"; then
-      echo -e "\033[33mWarning: favicon $logo skipped...\033[0m"
+      echo -e "\033[33mWarning: favicon $logo skipped...\033[0m\n"
       echo "$logo" >> "$SYNC_FILE_ERROR_LOG"
     fi
 }
