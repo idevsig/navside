@@ -23,11 +23,11 @@
   {{- with resources.Get . }}
     {{- if eq hugo.Environment "development" }}
       {{- with . }}
-        <script src="{{ .RelPermalink }}"></script>
+        <script src="{{ .RelPermalink | relURL }}"></script>
       {{- end }}
     {{- else }}
       {{- with . | fingerprint }}
-        <script src="{{ .RelPermalink }}" integrity="{{- .Data.Integrity }}" crossorigin="anonymous"></script>
+        <script src="{{ .RelPermalink | relURL }}" integrity="{{- .Data.Integrity }}" crossorigin="anonymous"></script>
       {{- end }}
     {{- end }}
   {{- end }}
@@ -44,12 +44,12 @@
   {{- with resources.Get . }}
     {{- if eq hugo.Environment "development" }}
       {{- with . | js.Build }}
-        <script src="{{ .RelPermalink }}"></script>
+        <script src="{{ .RelPermalink | relURL }}"></script>
       {{- end }}
     {{- else }}
       {{- $opts := dict "minify" true }}
       {{- with . | js.Build $opts | fingerprint }}
-        <script src="{{ .RelPermalink }}" integrity="{{- .Data.Integrity }}" crossorigin="anonymous"></script>
+        <script src="{{ .RelPermalink | relURL }}" integrity="{{- .Data.Integrity }}" crossorigin="anonymous"></script>
       {{- end }}
     {{- end }}
   {{- end }}

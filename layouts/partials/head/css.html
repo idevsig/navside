@@ -14,7 +14,7 @@
     {{- $css := resources.Match $cssPath }}
     {{- if $css }}
       {{- $fingerprint := index $css 0 | fingerprint }}
-      <link rel="stylesheet" href="{{ $fingerprint.RelPermalink }}" integrity="{{ $fingerprint.Data.Integrity }}" crossorigin="anonymous">
+      <link rel="stylesheet" href="{{ $fingerprint.RelPermalink | relURL }}" integrity="{{ $fingerprint.Data.Integrity }}" crossorigin="anonymous">
     {{- else }}
       <link rel="stylesheet" href="{{ $cssPath | relURL }}">
     {{- end }}
@@ -31,10 +31,10 @@
 {{- range $cssFiles }}
   {{- with resources.Get . }}
     {{- if eq hugo.Environment "development" }}
-      <link rel="stylesheet" href="{{ .RelPermalink }}">
+      <link rel="stylesheet" href="{{ .RelPermalink | relURL }}">
     {{- else }}
       {{- with . | minify | fingerprint }}
-        <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ .RelPermalink | relURL }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
       {{- end }}
     {{- end }}
   {{- end }}
