@@ -3,7 +3,11 @@
 # origin: https://git.jetsung.com/idev/idevnav/blob/main/.deploy.sh
 # lastmod: 2025-02-24
 
-set -euo pipefail
+if [[ -n "${DEBUG:-}" ]]; then
+  set -eux
+else
+  set -euo pipefail
+fi
 
 IN_CHINA="${CHINA:-}"
 
@@ -127,11 +131,11 @@ action_for_more_bracnch() {
 
   # update config.toml
   sed -i 's#精选导航#全量导航#g' config.toml
-  sed -i 's#nav.idev.top#navs.idev.top#g' config.toml
+  sed -i 's#nav.ooos.top#navs.ooos.top#g' config.toml
 
   # update {data,content}/headers.yml
   sed -i 's#全量#精选#g' "${DATA_DIR}/headers.yml"
-  sed -i 's#navs.idev.top#nav.idev.top#g' "${DATA_DIR}/headers.yml"
+  sed -i 's#navs.ooos.top#nav.ooos.top#g' "${DATA_DIR}/headers.yml"
   sed -i 's#bi-circle-fill#bi-circle-half#g' "${DATA_DIR}/headers.yml"
 }
 
@@ -293,18 +297,18 @@ get_icon_url() {
     cccyun)
       icon_url=$(printf "https://favicon.cccyun.cc/%s" "$part")
       ;;
-    skiy)
-      url_part=$(strip_protocol "$part")
-      icon_url=$(printf "https://favicon.skiy.net/%s" "$url_part")
-      ;;
     api_1)
       url_part=$(strip_protocol "$part")
-      icon_url=$(printf "https://favicons.ooos.top/?url=%s" "$url_part")
+      icon_url=$(printf "https://favicon-1.ooos.top/?url=%s" "$url_part")
       ;;
     api_2)
       url_part=$(strip_protocol "$part")
-      icon_url=$(printf "https://favicon.ooos.top/?url=%s" "$url_part")
+      icon_url=$(printf "https://favicon-2.ooos.top/?url=%s" "$url_part")
       ;;
+    api_3)
+      url_part=$(strip_protocol "$part")
+      icon_url=$(printf "https://favicon-3.ooos.top/%s" "$url_part")
+      ;;      
   esac
   
   echo "$icon_url" | tr -d '[:space:]'
@@ -352,14 +356,14 @@ process_icons() {
 
     local icon_hub=(
       "google_cn"
-      "api_1"
+      "api_1"      
+      "api_2"
+      "api_3"      
       "google"
       "cccyun"
       "faviconextractor"
       "toolb"
       "yandex"
-      "skiy"      
-      "api_2"
     )
 
     for hub in "${icon_hub[@]}"; do

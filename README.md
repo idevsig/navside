@@ -20,7 +20,7 @@
 ## 演示
 
 - 演示网站   
-  https://navside.skiy.net
+  https://navside.ooos.top
 - 本地演示   
 ```sh
 hugo serve --source=exampleSite
